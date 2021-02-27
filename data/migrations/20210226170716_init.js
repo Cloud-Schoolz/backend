@@ -1,70 +1,75 @@
 exports.up = function (knex) {
   return knex.schema
-    .createTable("roles", (tbl) => {
-      tbl.increments("role_id");
+  .createTable("students", (tbl) => {
+    tbl.increments("id");
 
-      tbl.string("name", 128).notNullable().unique();
+    tbl.string("email", 128).notNullable().unique();
+    tbl.string("password", 128).notNullable();
+    
+  })
+
+  .createTable("country", (tbl) => {
+    tbl.increments("country_id");
+    tbl.string("name", 128).notNullable().unique();
     })
-    .createTable("tasks", (tbl) => {
-      tbl.increments("task_id");
-      tbl.string("tasks_name", 128);
+    .createTable("admin", (tbl) => {
+      tbl.increments("admin_id");
+      tbl.string("email", 128).notNullable().unique();
+      tbl.string("password", 128).notNullable();
+      
     })
 
-    .createTable("volunteer", (tbl) => {
+    .createTable("volunteers", (tbl) => {
       tbl.increments("volunteer_id");
 
       tbl.string("email", 128).notNullable().unique();
       tbl.string("password", 128).notNullable();
+      tbl.string("availability", 128).notNullable();
       tbl
-        .integer("role")
+        .integer("country_id")
         .unsigned()
-        .references("roles.id")
+        .references("country.id")
         .onDelete("RESTRICT")
         .onUpdate("CASCADE")
-        .default(3);
     })
-    .createTable("student", (tbl) => {
-      tbl.increments("student_id");
 
-      tbl.string("email", 128).notNullable().unique();
-      tbl.string("password", 128).notNullable();
+    .createTable("tasks", (tbl) => {
+      tbl.increments("task_id");
+      tbl.string("task_name", 128).notNullable();
+      tbl.string("description", 128);
       tbl
-        .integer("role")
+        .integer("admin_id")
         .unsigned()
-        .references("roles.id")
+        .references("admin.id")
         .onDelete("RESTRICT")
-        .onUpdate("CASCADE")
-        .default(2);
+        .onUpdate("CASCADE");
     })
-
     .createTable("volTasks", (tbl) => {
       tbl.increments("id");
-      tbl.string("volunteer_task").notNullable();
       tbl
-        .integer("task")
+        .integer("task_id")
         .unsigned()
         .references("tasks.id")
         .onDelete("RESTRICT")
         .onUpdate("CASCADE");
-    })
-    .createTable("adminTasks", (tbl) => {
-      tbl.increments("id");
-      tbl.string("admin_task").notNullable();
       tbl
-        .integer("task")
+        .integer("volunteer_id")
         .unsigned()
-        .references("tasks.id")
+        .references("volunteer.id")
         .onDelete("RESTRICT")
         .onUpdate("CASCADE");
-    });
+        tbl.boolean("complete").default(false)
+        
+
+    })  
 };
 
 exports.down = function (knex) {
   return knex.schema
-    .dropTableIfExists("adminTasks")
     .dropTableIfExists("volTasks")
-    .dropTableIfExists("student")
-    .dropTableIfExists("volunteer")
     .dropTableIfExists("tasks")
-    .dropTableIfExists("roles");
+    .dropTableIfExists("volunteer")
+    .dropTableIfExists("admin")
+    .dropTableIfExists("country")
+    .dropTableIfExists("students");
 };
