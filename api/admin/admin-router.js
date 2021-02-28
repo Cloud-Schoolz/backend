@@ -58,9 +58,9 @@ router.post("/register", (req, res) => {
 
   function makeToken(user) {
     const payload = {
-      subject: user.id,
+      subject: user.admin_id,
       username: user.name,
-      role: user.role
+      admin: user.admin
     };
     const options = {
       expiresIn: '3 days',

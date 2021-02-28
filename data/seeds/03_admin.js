@@ -5,12 +5,14 @@ exports.seed = function (knex) {
     {
       name: "admin1",
       password: "password",
-      email: "admin1@student.com"
+      email: "admin1@student.com",
+      admin: "admin"
     },
     {
       name: "admin2",
       password: "password",
-      email: "admin2@student.com"
+      email: "admin2@student.com",
+      admin: "admin"
     }
   ];
 

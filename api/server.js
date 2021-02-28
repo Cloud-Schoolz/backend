@@ -9,10 +9,10 @@ const taskRouter = require("./tasks/tasks-router")
 
 server.use(express.json());
 
-server.use("/api/task", taskRouter)
+server.use("/api/tasks", taskRouter)
 server.use("/api/admin", adminRouter)
-server.use("/api/volunteer", volRouter)
-server.use("/api/student", studentRouter)
+server.use("/api/volunteers", volRouter)
+server.use("/api/students", studentRouter)
 server.use(helmet())
 server.use(cors())
 

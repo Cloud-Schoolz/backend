@@ -22,14 +22,14 @@ router.get("/:id", restricted , (req, res) => {
     }).catch(() => res.status(500).json({ message: "The task information could not be retrieved" }));
 });
 
-router.post("/", adminPrivledges(1) , (req, res) => {
+router.post("/",restricted, adminPrivledges("admin") , (req, res) => {
     const task = req.body
     Task.insert(task).then(newTask => {
         res.status(201).json(newTask);
     }).catch((err) => res.status(500).json({ message: err.message }))
 })
 
-router.put("/:id", (req, res) => {
+router.put("/:id", restricted, adminPrivledges("admin"), (req, res) => {
     const idVar = req.params.id;
     const task = req.body;
     Task.update(idVar, task).then((upTask) => {
@@ -41,7 +41,7 @@ router.put("/:id", (req, res) => {
     }).catch((err) => res.status(500).json({ message: err.message  }));
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", restricted, adminPrivledges("admin"), (req, res) => {
     const idVar = req.params.id;
     Task.remove(idVar).then((task) => {
         res.status(200).json({message: `The ${task} was deleted`});

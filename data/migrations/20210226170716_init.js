@@ -19,7 +19,7 @@ exports.up = function (knex) {
       tbl.string("name",128).notNullable()
       tbl.string("email", 128).notNullable().unique();
       tbl.string("password", 128).notNullable();
-      tbl.integer("role").default(1)
+      tbl.string("admin",128).default("admin")
       
     })
 
