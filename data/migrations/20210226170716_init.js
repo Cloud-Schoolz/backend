@@ -3,6 +3,7 @@ exports.up = function (knex) {
   .createTable("students", (tbl) => {
     tbl.increments("id");
 
+    tbl.string("name",128).notNullable()
     tbl.string("email", 128).notNullable().unique();
     tbl.string("password", 128).notNullable();
     
@@ -14,23 +15,29 @@ exports.up = function (knex) {
     })
     .createTable("admin", (tbl) => {
       tbl.increments("admin_id");
+
+      tbl.string("name",128).notNullable()
       tbl.string("email", 128).notNullable().unique();
       tbl.string("password", 128).notNullable();
+      tbl.integer("role").default(1)
       
     })
 
     .createTable("volunteers", (tbl) => {
       tbl.increments("volunteer_id");
 
+      tbl.string("name",128).notNullable()
       tbl.string("email", 128).notNullable().unique();
       tbl.string("password", 128).notNullable();
       tbl.string("availability", 128).notNullable();
       tbl
         .integer("country_id")
         .unsigned()
-        .references("country.id")
-        .onDelete("RESTRICT")
+        .references("country.country_id")
         .onUpdate("CASCADE")
+        .onDelete("CASCADE")
+        .notNullable()
+       
     })
 
     .createTable("tasks", (tbl) => {
@@ -40,8 +47,8 @@ exports.up = function (knex) {
       tbl
         .integer("admin_id")
         .unsigned()
-        .references("admin.id")
-        .onDelete("RESTRICT")
+        .references("admin.admin_id")
+        .onDelete("CASCADE")
         .onUpdate("CASCADE");
     })
     .createTable("volTasks", (tbl) => {
@@ -49,14 +56,14 @@ exports.up = function (knex) {
       tbl
         .integer("task_id")
         .unsigned()
-        .references("tasks.id")
-        .onDelete("RESTRICT")
+        .references("tasks.task_id")
+        .onDelete("CASCADE")
         .onUpdate("CASCADE");
       tbl
         .integer("volunteer_id")
         .unsigned()
-        .references("volunteer.id")
-        .onDelete("RESTRICT")
+        .references("volunteers.volunteer_id")
+        .onDelete("CASCADE")
         .onUpdate("CASCADE");
         tbl.boolean("complete").default(false)
         
