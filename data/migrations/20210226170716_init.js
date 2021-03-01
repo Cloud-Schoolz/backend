@@ -35,7 +35,6 @@ exports.up = function (knex) {
         .inTable("country")
         .onUpdate("CASCADE")
         .onDelete("CASCADE")
-        .notNullable();
     })
 
     .createTable("tasks", (tbl) => {
