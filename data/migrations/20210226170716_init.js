@@ -31,7 +31,7 @@ exports.up = function (knex) {
       tbl
         .integer("country_id")
         .unsigned()
-        .references("country.country_id")
+        .references("country.id")
         .onUpdate("CASCADE")
         .onDelete("CASCADE")
         .notNullable();
