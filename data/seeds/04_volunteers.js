@@ -1,16 +1,13 @@
-
 exports.seed = function (knex) {
   // 000-cleanup.js already cleaned out all tables
 
-  const volunteer = [{
-    name: "volunteer ",
-    email: "volunteer@student.com",
-    password: "password",
-    availability:"weekdays",
-    
-    
-  },
-  
+  const volunteer = [
+    {
+      name: "volunteer ",
+      email: "volunteer@student.com",
+      password: "password",
+      availability: "weekdays",
+    },
   ];
 
   return knex("volunteers")

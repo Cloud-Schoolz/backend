@@ -1,16 +1,13 @@
-let csc = require('country-state-city').default
-
+let csc = require("country-state-city").default;
 
 exports.seed = function (knex) {
   // 000-cleanup.js already cleaned out all tables
 
-  const country = csc.getAllCountries().map(item => {
+  const country = csc.getAllCountries().map((item) => {
     return {
-      name: item.name
-    }
-  })
-    
-  
+      name: item.name,
+    };
+  });
 
   return knex("country")
     .del()
