@@ -21,21 +21,21 @@ exports.up = function (knex) {
       tbl.string("admin", 128).default("admin");
     })
 
-    .createTable("volunteers", (tbl) => {
-      tbl.increments("id");
+    // .createTable("volunteers", (tbl) => {
+    //   tbl.increments("id");
 
-      tbl.string("name", 128);
-      tbl.string("email", 128).notNullable().unique();
-      tbl.string("password", 128).notNullable();
-      tbl.string("availability", 128).notNullable();
-      tbl
-        .integer("Test_id")
-        .unsigned()
-        .references("id")
-        .inTable("country")
-        .onUpdate("CASCADE")
-        .onDelete("CASCADE")
-    })
+    //   tbl.string("name", 128);
+    //   tbl.string("email", 128).notNullable().unique();
+    //   tbl.string("password", 128).notNullable();
+    //   tbl.string("availability", 128).notNullable();
+    //   tbl
+    //     .integer("country_id")
+    //     .unsigned()
+    //     .references("id")
+    //     .inTable("country")
+    //     .onUpdate("CASCADE")
+    //     .onDelete("CASCADE")
+    // })
 
     .createTable("tasks", (tbl) => {
       tbl.increments("id");
@@ -56,14 +56,14 @@ exports.up = function (knex) {
         .references("tasks.id")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
-      tbl
-        .integer("volunteer_id")
-        .unsigned()
-        .references("volunteers.id")
-        .onDelete("CASCADE")
-        .onUpdate("CASCADE");
-      tbl.boolean("complete").default(false);
-    });
+    //   tbl
+    //     .integer("volunteer_id")
+    //     .unsigned()
+    //     .references("volunteers.id")
+    //     .onDelete("CASCADE")
+    //     .onUpdate("CASCADE");
+    //   tbl.boolean("complete").default(false);
+    // });
 };
 
 exports.down = function (knex) {
