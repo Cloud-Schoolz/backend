@@ -1,7 +1,7 @@
 exports.up = function (knex) {
   return knex.schema
     .createTable("students", (tbl) => {
-      tbl.increments();
+      tbl.increments("id");
 
       tbl.string("name", 128);
       tbl.string("email", 128).notNullable().unique();
@@ -9,11 +9,11 @@ exports.up = function (knex) {
     })
 
     .createTable("country", (tbl) => {
-      tbl.increments();
+      tbl.increments("id");
       tbl.string("name", 128).notNullable().unique();
     })
     .createTable("admin", (tbl) => {
-      tbl.increments();
+      tbl.increments("id");
 
       tbl.string("name", 128);
       tbl.string("email", 128).notNullable().unique();
@@ -22,7 +22,7 @@ exports.up = function (knex) {
     })
 
     .createTable("volunteers", (tbl) => {
-      tbl.increments();
+      tbl.increments("id");
 
       tbl.string("name", 128);
       tbl.string("email", 128).notNullable().unique();
@@ -31,14 +31,15 @@ exports.up = function (knex) {
       tbl
         .integer("country_id")
         .unsigned()
-        .references("country.id")
+        .references("id")
+        .inTable("country")
         .onUpdate("CASCADE")
         .onDelete("CASCADE")
         .notNullable();
     })
 
     .createTable("tasks", (tbl) => {
-      tbl.increments();
+      tbl.increments("id");
       tbl.string("task_name", 128).notNullable();
       tbl.string("description", 128);
       tbl
@@ -49,7 +50,7 @@ exports.up = function (knex) {
         .onUpdate("CASCADE");
     })
     .createTable("volTasks", (tbl) => {
-      tbl.increments();
+      tbl.increments("id");
       tbl
         .integer("task_id")
         .unsigned()
