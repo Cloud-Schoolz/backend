@@ -1,32 +1,30 @@
 exports.up = function (knex) {
   return knex.schema
-  .createTable("students", (tbl) => {
-    tbl.increments("id");
+    .createTable("students", (tbl) => {
+      tbl.increments("id");
 
-    tbl.string("name",128)
-    tbl.string("email", 128).notNullable().unique();
-    tbl.string("password", 128).notNullable();
-    
-  })
+      tbl.string("name", 128);
+      tbl.string("email", 128).notNullable().unique();
+      tbl.string("password", 128).notNullable();
+    })
 
-  .createTable("country", (tbl) => {
-    tbl.increments("country_id");
-    tbl.string("name", 128).notNullable().unique();
+    .createTable("country", (tbl) => {
+      tbl.increments("country_id");
+      tbl.string("name", 128).notNullable().unique();
     })
     .createTable("admin", (tbl) => {
       tbl.increments("admin_id");
 
-      tbl.string("name",128)
+      tbl.string("name", 128);
       tbl.string("email", 128).notNullable().unique();
       tbl.string("password", 128).notNullable();
-      tbl.string("admin",128).default("admin")
-      
+      tbl.string("admin", 128).default("admin");
     })
 
     .createTable("volunteers", (tbl) => {
       tbl.increments("volunteer_id");
 
-      tbl.string("name",128)
+      tbl.string("name", 128);
       tbl.string("email", 128).notNullable().unique();
       tbl.string("password", 128).notNullable();
       tbl.string("availability", 128).notNullable();
@@ -36,8 +34,7 @@ exports.up = function (knex) {
         .references("country.country_id")
         .onUpdate("CASCADE")
         .onDelete("CASCADE")
-        .notNullable()
-       
+        .notNullable();
     })
 
     .createTable("tasks", (tbl) => {
@@ -65,10 +62,8 @@ exports.up = function (knex) {
         .references("volunteers.volunteer_id")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
-        tbl.boolean("complete").default(false)
-        
-
-    })  
+      tbl.boolean("complete").default(false);
+    });
 };
 
 exports.down = function (knex) {

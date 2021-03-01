@@ -5,10 +5,10 @@ exports.seed = function (knex) {
   const volTasks = [
     {
       task_id: 1,
-      volunteer_id: 2
+      volunteer_id: 1
     },
     {
-      task_id: 2,
+      task_id: 1,
       volunteer_id: 1
     },
     {

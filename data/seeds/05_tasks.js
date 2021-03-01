@@ -10,7 +10,7 @@ exports.seed = function (knex) {
   {
     task_name: "assign partners",
     description: "assign lab partners for students",
-    admin_id: 2 
+    admin_id: 1 
   }
     
   ];
