@@ -54,5 +54,5 @@ const sharedConfig = {
 module.exports = {
   development: { ...sharedConfig },
   production: { ...sharedConfig, pool: { min: 2, max: 10 } },
-  testing: { ...sharedConfig, connection: { filename: "./database/test.pg" } },
+  // testing: { ...sharedConfig, connection: { filename: "./database/test.pg" } },
 };
