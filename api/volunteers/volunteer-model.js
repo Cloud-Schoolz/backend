@@ -8,7 +8,7 @@ module.exports = {
 }
 
 function find() {
-    return db("volunteers").select("name", "email", "availability", "country_id").orderBy("id")
+    return db("volunteers").select("name", "email", "availability", "giraffe_id").orderBy("id")
 }
 
 function findBy(filter) {

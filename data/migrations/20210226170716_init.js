@@ -29,7 +29,7 @@ exports.up = function (knex) {
       tbl.string("password", 128).notNullable();
       tbl.string("availability", 128).notNullable();
       tbl
-        .integer("country_id")
+        .integer("TEST!_id")
         .unsigned()
         .references("id")
         .inTable("country")
