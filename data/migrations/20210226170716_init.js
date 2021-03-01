@@ -1,7 +1,7 @@
 exports.up = function (knex) {
   return knex.schema
     .createTable("students", (tbl) => {
-      tbl.increments("id");
+      tbl.increments();
 
       tbl.string("name", 128);
       tbl.string("email", 128).notNullable().unique();
@@ -9,11 +9,11 @@ exports.up = function (knex) {
     })
 
     .createTable("country", (tbl) => {
-      tbl.increments("country_id");
+      tbl.increments();
       tbl.string("name", 128).notNullable().unique();
     })
     .createTable("admin", (tbl) => {
-      tbl.increments("admin_id");
+      tbl.increments();
 
       tbl.string("name", 128);
       tbl.string("email", 128).notNullable().unique();
@@ -22,7 +22,7 @@ exports.up = function (knex) {
     })
 
     .createTable("volunteers", (tbl) => {
-      tbl.increments("volunteer_id");
+      tbl.increments();
 
       tbl.string("name", 128);
       tbl.string("email", 128).notNullable().unique();
@@ -38,28 +38,28 @@ exports.up = function (knex) {
     })
 
     .createTable("tasks", (tbl) => {
-      tbl.increments("task_id");
+      tbl.increments();
       tbl.string("task_name", 128).notNullable();
       tbl.string("description", 128);
       tbl
         .integer("admin_id")
         .unsigned()
-        .references("admin.admin_id")
+        .references("admin.id")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
     })
     .createTable("volTasks", (tbl) => {
-      tbl.increments("id");
+      tbl.increments();
       tbl
         .integer("task_id")
         .unsigned()
-        .references("tasks.task_id")
+        .references("tasks.id")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
       tbl
         .integer("volunteer_id")
         .unsigned()
-        .references("volunteers.volunteer_id")
+        .references("volunteers.id")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
       tbl.boolean("complete").default(false);
