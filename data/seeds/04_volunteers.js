@@ -7,7 +7,7 @@ exports.seed = function (knex) {
     email: "volunteer@student.com",
     password: "password",
     availability:"weekdays",
-    country_id: 5
+    
     
   },
   
