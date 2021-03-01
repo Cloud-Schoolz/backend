@@ -16,5 +16,9 @@ server.use("/api/students", studentRouter)
 server.use(helmet())
 server.use(cors())
 
+server.get("/", (req,res)=>{
+    res.status(200).json({message: "Welcome to cloud_schoolz api!"})
+})
+
 
 module.exports = server
