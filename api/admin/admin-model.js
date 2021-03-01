@@ -8,11 +8,11 @@ module.exports = {
 }
 
 function find() {
-    return db("admin").select("name", "email").orderBy("admin_id")
+    return db("admin").select("name", "email").orderBy("id")
 }
 
 function findBy(filter) {
-    return db("admin").where(filter).orderBy("admin_id")
+    return db("admin").where(filter).orderBy("id")
 }
 
 async function add(admin) {
@@ -26,5 +26,5 @@ async function add(admin) {
 }
 
 function findById(id) {
-    return db("admin").select("name").where({ admin_id: id }).first()
+    return db("admin").select("name").where({ id: id }).first()
 }

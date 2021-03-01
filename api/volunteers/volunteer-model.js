@@ -8,11 +8,11 @@ module.exports = {
 }
 
 function find() {
-    return db("volunteers").select("name", "email", "availability", "country_id").orderBy("volunteer_id")
+    return db("volunteers").select("name", "email", "availability", "country_id").orderBy("id")
 }
 
 function findBy(filter) {
-    return db("volunteers").where(filter).orderBy("volunteer_id")
+    return db("volunteers").where(filter).orderBy("id")
 }
 
 async function add(volunteer) {
@@ -26,5 +26,5 @@ async function add(volunteer) {
 }
 
 function findById(id) {
-    return db("volunteers").select("name").where({ volunteer_id: id }).first()
+    return db("volunteers").select("name").where({ id: id }).first()
 }
