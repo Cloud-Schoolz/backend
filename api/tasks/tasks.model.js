@@ -9,11 +9,11 @@ module.exports = {
 };
 
 function find() {
-  return db('tasks').select("task_name","description","id");
+  return db('tasks').select("task_name", "description");
 }
 
 function findById(id) {
-    return db("tasks").select("task_name","description").where({ id: id }).first()
+    return db("tasks").select("task_name", "description").where({ id: id }).first()
 }
 
 function insert(task) {

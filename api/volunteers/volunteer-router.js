@@ -70,7 +70,16 @@ router.post("/register", (req, res) => {
 
 
 
-
+  router.get("/tasks/:id",(req, res) => {
+    const idVar = req.params.id
+    Vol.volTask(idVar).then((country) => {
+        if (!country) {
+            res.status(404).json({ message: "The task with the specified ID does not exist" });
+        }else {
+            res.status(200).json(country);
+        }
+    }).catch(() => res.status(500).json({ message: "The task information could not be retrieved" }));
+});
 
 
 

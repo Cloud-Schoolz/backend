@@ -5,16 +5,16 @@ const router = express.Router();
 
 
 
-// router.get("/volcountry", (req, res) => {
-//     Country.volCountry().then(( country ) => {
-//         res.status(200).json( country );
-//     }).catch((err) => res.status(500).json({ message: err.messege }));
-// });
+router.get("/volcountry", (req, res) => {
+    Country.volCountry().then(( country ) => {
+        res.status(200).json( country );
+    }).catch((err) => res.status(500).json({ message: err.messege }));
+});
 
 
 router.get("/volcountry/:id",(req, res) => {
     const idVar = req.params.id
-    Country.volCountry(idVar).then((country) => {
+    Country.volCountryId(idVar).then((country) => {
         if (!country) {
             res.status(404).json({ message: "The country with the specified ID does not exist" });
         }else {

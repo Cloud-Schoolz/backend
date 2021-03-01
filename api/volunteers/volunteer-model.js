@@ -5,6 +5,7 @@ module.exports = {
     find,
     findBy,
     findById,
+    volTask
 }
 
 function find() {
@@ -28,3 +29,10 @@ async function add(volunteer) {
 function findById(id) {
     return db("volunteers").select("name").where({ id: id }).first()
 }
+
+function volTask(id) {
+    return db("tasks as t")
+      .select("v.name as volunteer_name","t.task_name as task_name", "t.description as description")
+      .innerJoin("volunteers as v","t.id","v.id")
+      .where("t.id", id);
+  }
