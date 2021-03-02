@@ -65,6 +65,22 @@ function makeToken(user) {
   return jwt.sign(payload, jwtSecret, options);
 }
 
+router.put("/:id", (req, res) => {
+  const idVar = req.params.id;
+  const volunteer = req.body;
+  Vol.update(idVar, volunteer)
+    .then((upVol) => {
+      if (upVol) {
+        res.status(200).json(upVol);
+      } else {
+        res
+          .status(404)
+          .json({ message: "The task with the specified ID does not exist" });
+      }
+    })
+    .catch((err) => res.status(500).json({ message: err.message }));
+});
+
 router.get("/tasks/:id", (req, res) => {
   const idVar = req.params.id;
   Vol.volTask(idVar)
@@ -116,6 +132,27 @@ router.get("/country/:id", (req, res) => {
       res
         .status(500)
         .json({ message: "The country information could not be retrieved" })
+    );
+});
+
+router.get("/:id", (req, res) => {
+  const idVar = req.params.id;
+  Vol.findById(idVar)
+    .then((volunteer) => {
+      if (!volunteer) {
+        res
+          .status(404)
+          .json({
+            message: "The volunteer with the specified ID does not exist",
+          });
+      } else {
+        res.status(200).json(volunteer);
+      }
+    })
+    .catch(() =>
+      res
+        .status(500)
+        .json({ message: "The volunteer information could not be retrieved" })
     );
 });
 

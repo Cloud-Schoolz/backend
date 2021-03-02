@@ -8,11 +8,15 @@ module.exports = {
   volTask,
   volCountry,
   volCountryId,
+  update,
 };
+function update(id, volunteer) {
+  return db("volunteers").where("id", id).update(volunteer);
+}
 
 function find() {
   return db("volunteers")
-    .select("name", "email", "availability", "country_id")
+    .select("id", "name", "email", "availability", "country_id")
     .orderBy("id");
 }
 
@@ -31,7 +35,10 @@ async function add(volunteer) {
 }
 
 function findById(id) {
-  return db("volunteers").select("name").where({ id: id }).first();
+  return db("volunteers")
+    .select("id", "name", "email", "availability", "country_id")
+    .where({ id: id })
+    .first();
 }
 
 function volTask(id) {
