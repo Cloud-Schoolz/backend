@@ -61,5 +61,5 @@ function volCountryId(id) {
   return db("country as c")
     .select("c.name as country_name", "v.name as volunteer_name")
     .innerJoin("volunteers as v", "c.id", "v.country_id")
-    .where("v.country_id", id);
+    .where("v.id", id);
 }
