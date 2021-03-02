@@ -9,6 +9,7 @@ module.exports = {
   volCountry,
   volCountryId,
   update,
+  remove
 };
 function update(id, volunteer) {
   return db("volunteers").where("id", id).update(volunteer);
@@ -62,4 +63,8 @@ function volCountryId(id) {
     .select("c.name as country_name", "v.name as volunteer_name")
     .innerJoin("volunteers as v", "c.id", "v.country_id")
     .where("v.id", id);
+}
+
+function remove(id) {
+  return db("volunteers").where("id", id).del();
 }

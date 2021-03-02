@@ -4,6 +4,7 @@ const router = require("express").Router();
 const Vol = require("../volunteers/volunteer-model");
 const { isValid } = require("../middleware/isValid");
 const { jwtSecret } = require("../middleware/secret");
+const server = require("../server");
 
 router.post("/register", (req, res) => {
   const credentials = req.body;
@@ -155,5 +156,15 @@ router.get("/:id", (req, res) => {
         .json({ message: "The volunteer information could not be retrieved" })
     );
 });
+
+router.delete("/:id", (req, res) => {
+  const idVar = req.params.id;
+  Vol.remove(idVar)
+     .then((volunteer) => {
+      res.status(200).json({ message: `The volunteer at ID: ${volunteer} was deleted` });
+    })
+    .catch((err) => res.status(500).json({ message: err.message }));
+});
+
 
 module.exports = router;
