@@ -8,7 +8,7 @@ module.exports = {
 };
 
 function find() {
-  return db("country").select("name").orderBy("id");
+  return db("country").select("name","id").orderBy("id");
 }
 
 function findBy(filter) {
