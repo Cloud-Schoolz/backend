@@ -47,7 +47,8 @@ function volTask(id) {
     .select(
       "v.name as volunteer_name",
       "t.task_name as task_name",
-      "t.description as description"
+      "t.description as description",
+      "t.id as task_id"
     )
     .innerJoin("volunteers as v", "t.id", "v.id")
     .where("t.id", id);
