@@ -4,7 +4,8 @@ const router = require("express").Router();
 const Vol = require("../volunteers/volunteer-model");
 const { isValid } = require("../middleware/isValid");
 const { jwtSecret } = require("../middleware/secret");
-const server = require("../server");
+const restricted = require("../middleware/auth");
+const adminPrivledges = require("../middleware/adminCheck")
 
 router.post("/register", (req, res) => {
   const credentials = req.body;
@@ -144,7 +145,7 @@ router.get("/:id", (req, res) => {
         res
           .status(404)
           .json({
-            message: "The volunteer with the specified ID does not exist",
+            message: "The volunteer with the specified ID does not exist ",
           });
       } else {
         res.status(200).json(volunteer);
@@ -153,7 +154,7 @@ router.get("/:id", (req, res) => {
     .catch(() =>
       res
         .status(500)
-        .json({ message: "The volunteer information could not be retrieved" })
+        .json({ message: "The volunteer information could not be retrieved TEST" })
     );
 });
 
@@ -166,5 +167,37 @@ router.delete("/:id", (req, res) => {
     .catch((err) => res.status(500).json({ message: err.message }));
 });
 
+router.get("/all/tasks", (req, res) => {
+  Vol.findVolTask()
+    .then((country) => {
+      res.status(200).json(country);
+    })
+    .catch((err) => res.status(500).json({ message: err.messege }));
+});
+
+router.post("/tasks/:id", restricted, adminPrivledges("admin"), (req, res) => {
+  const task = req.body;
+  Vol.insert(task)
+    .then((newTask) => {
+      res.status(201).json(newTask);
+    })
+    .catch((err) => res.status(500).json({ message: err.message }));
+});
+
+router.put("/tasks/:id", restricted, adminPrivledges("admin"), (req, res) => {
+  const idVar = req.params.id;
+  const task = req.body;
+  Vol.updateVolTasks(idVar, task)
+    .then((upTask) => {
+      if (upTask) {
+        res.status(200).json(upTask);
+      } else {
+        res
+          .status(404)
+          .json({ message: "The task with the specified ID does not exist" });
+      }
+    })
+    .catch((err) => res.status(500).json({ message: err.message }));
+})
 
 module.exports = router;

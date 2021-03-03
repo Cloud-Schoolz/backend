@@ -47,6 +47,12 @@ exports.up = function (knex) {
         .references("admin.id")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
+      tbl
+        .integer("volunteer_id")
+        .unsigned()
+        .references("volunteers.id")
+        .onDelete("CASCADE")
+        .onUpdate("CASCADE");
     })
     .createTable("volTasks", (tbl) => {
       tbl.increments("id");
@@ -70,7 +76,7 @@ exports.down = function (knex) {
   return knex.schema
     .dropTableIfExists("volTasks")
     .dropTableIfExists("tasks")
-    .dropTableIfExists("volunteer")
+    .dropTableIfExists("volunteers")
     .dropTableIfExists("admin")
     .dropTableIfExists("country")
     .dropTableIfExists("students");

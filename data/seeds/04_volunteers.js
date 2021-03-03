@@ -3,11 +3,34 @@ exports.seed = function (knex) {
 
   const volunteer = [
     {
-      name: "volunteer ",
-      email: "volunteer@student.com",
+      name: "volunteer1",
+      email: "volunteer1@student.com",
       password: "password",
-      availability: "weekdays",
+      availability: "weekdays"
+      
+
     },
+    {
+      name: "volunteer2",
+      email: "volunteer2@student.com",
+      password: "password",
+      availability: "weekdays"
+    
+    },
+    {
+      name: "volunteer3",
+      email: "voluntee3@student.com",
+      password: "password",
+      availability: "weekdays"
+      
+    },
+    {
+      name: "volunteer4",
+      email: "voluntee4@student.com",
+      password: "password",
+      availability: "weekdays"
+      
+    }
   ];
 
   return knex("volunteers")
