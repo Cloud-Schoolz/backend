@@ -12,4 +12,4 @@ The aim is to help close the achievement gap by connecting students with availab
 
 3. Homepage for `volunteer` to view their `tasks` from an `admin`.
 
-4. Homepage for `student`s to see the profiles of all registered `volunteers`. They can search by their listed `availability time`s, or their `country`.
+4. Homepage for `student`s to see the profiles of all registered `volunteers`. They can search by their listed `country`.
